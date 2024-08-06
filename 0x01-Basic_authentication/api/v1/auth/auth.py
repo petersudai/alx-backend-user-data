@@ -13,6 +13,7 @@ class Auth:
     """
     authenticating users
     """
+
     def require_auth(self, path: str, excluded_paths: List[str]) -> bool:
         """
         Method to check if authentication is required for given path
@@ -26,7 +27,8 @@ class Auth:
         path = path if path.endswith('/') else path + '/'
 
         for excluded_path in excluded_paths:
-            excluded_path = excluded_path if excluded_path.endswith('/') else excluded_path + '/'
+            excluded_path = excluded_path if excluded_path.endswith(
+                '/') else excluded_path + '/'
             if path == excluded_path:
                 return False
 
