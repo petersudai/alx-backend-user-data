@@ -8,7 +8,7 @@ from api.v1.auth.auth import Auth
 class BasicAuth(Auth):
     """ BasicAuth class that inherits from Auth """
 
-    def extract_based64_authorization_header(
+    def extract_base64_authorization_header(
             self, authorization_header: str) -> str:
         """
         Extracts Base64 part of Authorization header for Basic Authentication
