@@ -14,22 +14,23 @@ class Auth:
     authenticating users
     """
 
-    def require_auth(self, path: str, excluded_paths: List[str]) -> bool:
+    def require_auth(self, path: str, excluded_paths: list) -> bool:
         """
         Method to check if authentication is required for given path
         """
-        if path is None:
+        if path is None or not excluded_paths:
             return True
 
-        if excluded_paths is None or len(excluded_paths) == 0:
-            return True
-
-        path = path if path.endswith('/') else path + '/'
+        if path[-1= != '/':
+                path += '/'
 
         for excluded_path in excluded_paths:
-            excluded_path = excluded_path if excluded_path.endswith(
-                '/') else excluded_path + '/'
-            if path == excluded_path:
+            if excluded_path.endswith('*'):
+                if path.startswith(excluded_path[:-1]):
+                    return False
+
+            else:
+                if path == excluded_path:
                 return False
 
         return True
