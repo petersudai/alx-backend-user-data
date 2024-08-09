@@ -100,9 +100,10 @@ class BasicAuth(Auth):
         if base64_authorization_header is None:
             return None
 
-        decoded_base64_authorization_header = self.decode_base64_\
-            authorization_header(
+        decoded_base64_authorization_header = (
+            self.decode_base64_authorization_header(
                 base64_authorization_header)
+        )
         if decoded_base64_authorization_header is None:
             return None
 
