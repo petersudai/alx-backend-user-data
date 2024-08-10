@@ -4,6 +4,7 @@ Auth module for the API
 """
 from typing import List, TypeVar
 from flask import request
+import os
 
 
 User = TypeVar('User')
