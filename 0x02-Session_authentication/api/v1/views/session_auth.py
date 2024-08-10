@@ -1,4 +1,4 @@
-# api/v1/views/session_auth.py
+#!/usr/bin/env python3
 """ Session Authentication Views
 """
 from flask import request, jsonify, make_response
