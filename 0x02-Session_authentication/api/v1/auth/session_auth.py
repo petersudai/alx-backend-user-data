@@ -50,4 +50,3 @@ class SessionAuth(Auth):
         user = User.get(user_id)
 
         return user
-
