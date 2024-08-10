@@ -37,7 +37,7 @@ def login():
     if not user.is_valid_password(password):
         return jsonify({"error": "wrong password"}), 402
 
-    session_id = auth.create_session(user, id)
+    session_id = auth.create_session(user.id)
 
     response = jsonify(user.to_json())
 
