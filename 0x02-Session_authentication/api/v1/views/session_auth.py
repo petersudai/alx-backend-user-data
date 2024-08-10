@@ -3,7 +3,8 @@
 """
 from flask import request, jsonify, make_response
 from models.user import User
-from api.v1.app import auth  # Import auth here to avoid circular imports
+from api.v1.app import auth
+
 
 @app_views.route('/auth_session/login', methods=['POST'], strict_slashes=False)
 def login():
