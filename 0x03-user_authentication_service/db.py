@@ -46,15 +46,9 @@ class DB:
         Find a user in the database by arbitrary keyword arguments
         """
         try:
-            user = self._session.query(User).filter_by(**kwargs).first()
-
-            if user is None:
-                raise NoResultFound
-
+            user = self._session.query(User).filter_by(**kwargs).one()
             return user
-
-        except InvalidRequestError as e:
-            raise InvalidRequestError from e
-
-        except NoResultFound as e:
-            raise NoResultFound from e
+        except NoResultFound:
+            raise NoResultFound("No user found with the given criteria")
+        except Exception as e:
+            raise InvalidRequestError(f"Invalid query arguments: {e}")
