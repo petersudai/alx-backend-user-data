@@ -10,6 +10,8 @@ from sqlalchemy.exc import InvalidRequestError
 from sqlalchemy.orm.exc import NoResultFound
 from user import Base, User
 
+VALID_FIELDS = ['id', 'email', 'hashed_password', 'session_id', 'reset_token']
+
 
 class DB:
     """DB class"""
@@ -43,10 +45,15 @@ class DB:
         """
         Find a user in the database by arbitrary keyword arguments
         """
+        if not kwargs:
+            raise InvalidRequestError
+
+        for key in kwargs:
+            if key not in VALID_FIELDS:
+                raise InvalidRequestError
+
+        session = self._session
         try:
-            user = self._session.query(User).filter_by(**kwargs).one()
-            return user
+            return session.query(User).filter_by(**kwargs).one()
         except NoResultFound:
-            raise NoResultFound("No user found with the given criteria")
-        except Exception as e:
-            raise InvalidRequestError(f"Invalid query arguments: {e}")
+            raise NoResultFound
