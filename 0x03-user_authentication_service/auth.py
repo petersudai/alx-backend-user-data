@@ -3,18 +3,10 @@
 _hash_password method that takes in password string arguments and returns bytes
 """
 import bcrypt
+import uuid
 from db import DB
 from user import User
 from sqlalchemy.orm.exc import NoResultFound
-
-
-def _hash_password(password: str) -> bytes:
-    """
-    Hashes a password using bcrypt's hashing function
-    """
-    salt = bcrypt.gensalt()
-    hashed_password = bcrypt.hashpw(password.encode('utf-8'), salt)
-    return hashed_password
 
 
 class Auth:
@@ -50,3 +42,17 @@ class Auth:
                 user.hashed_password)
         except NoResultFound:
             return False
+
+    def _hash_password(password: str) -> bytes:
+    """
+    Hashes a password using bcrypt's hashing function
+    """
+    salt = bcrypt.gensalt()
+    hashed_password = bcrypt.hashpw(password.encode('utf-8'), salt)
+    return hashed_password
+
+    def _generate_uuid(self) -> str:
+        """
+        Generates a new UUID and returns its string representation
+        """
+        return str(uuid.uuid4())
