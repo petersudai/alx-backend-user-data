@@ -26,7 +26,7 @@ def users():
     POST /users route to register a new user
     """
     email = request.form.get("email")
-    password = request.form.gete("password")
+    password = request.form.get("password")
 
     if not email or not password:
         return jsonify({"message": "email and password are required"}), 400
