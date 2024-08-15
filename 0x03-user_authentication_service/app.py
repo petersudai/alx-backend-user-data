@@ -31,7 +31,7 @@ def users():
     if not email:
         return jsonify({"message": "email is required"}), 400
     if not password:
-        return jsonfiy({"message": "password is required"}), 400
+        return jsonify({"message": "password is required"}), 400
 
     try:
         user = AUTH.register_user(email, password)
